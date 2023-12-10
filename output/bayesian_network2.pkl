@@ -1,0 +1,48 @@
+network unknown {
+}
+variable Humidity {
+    type discrete [ 2 ] { High, Normal };
+    property weight = None ;
+}
+variable PlayTennis {
+    type discrete [ 2 ] { No, Yes };
+    property weight = None ;
+}
+variable Temperature {
+    type discrete [ 3 ] { Cool, Hot, Mild };
+    property weight = None ;
+}
+variable Weather {
+    type discrete [ 3 ] { Overcast, Rainy, Sunny };
+    property weight = None ;
+}
+probability ( Humidity ) {
+    table 0.5384615384615384, 0.46153846153846156 ;
+}
+probability ( PlayTennis | Humidity, Temperature, Weather ) {
+    ( High, Cool, Overcast ) 0.5, 0.5;
+    ( High, Cool, Rainy ) 0.5, 0.5;
+    ( High, Cool, Sunny ) 0.5, 0.5;
+    ( High, Hot, Overcast ) 0.0, 1.0;
+    ( High, Hot, Rainy ) 0.5, 0.5;
+    ( High, Hot, Sunny ) 1.0, 0.0;
+    ( High, Mild, Overcast ) 0.0, 1.0;
+    ( High, Mild, Rainy ) 0.5, 0.5;
+    ( High, Mild, Sunny ) 1.0, 0.0;
+    ( Normal, Cool, Overcast ) 0.0, 1.0;
+    ( Normal, Cool, Rainy ) 0.0, 1.0;
+    ( Normal, Cool, Sunny ) 0.0, 1.0;
+    ( Normal, Hot, Overcast ) 0.0, 1.0;
+    ( Normal, Hot, Rainy ) 0.5, 0.5;
+    ( Normal, Hot, Sunny ) 0.5, 0.5;
+    ( Normal, Mild, Overcast ) 0.5, 0.5;
+    ( Normal, Mild, Rainy ) 0.0, 1.0;
+    ( Normal, Mild, Sunny ) 0.0, 1.0;
+
+}
+probability ( Temperature ) {
+    table 0.23076923076923078, 0.3076923076923077, 0.46153846153846156 ;
+}
+probability ( Weather ) {
+    table 0.3076923076923077, 0.3076923076923077, 0.38461538461538464 ;
+}
